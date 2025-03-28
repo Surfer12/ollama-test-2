@@ -43,8 +43,6 @@ class ChatSchema(BaseModel):
     stream: bool = Field(False, description="Whether to stream the response")
     conversation_id: Optional[str] = Field(None, description="Conversation ID")
 
-chat_schema = ChatSchema()
-
 @app.route('/api/v1/chat', methods=['POST'])
 def chat():
     logger.info("Received request at /api/v1/chat")
@@ -53,7 +51,7 @@ def chat():
 
         # Validate input data
         try:
-            validated_data = chat_schema.parse_obj(data)
+            validated_data = ChatSchema(**data)
         except ValidationError as e:
             logger.error(f"Validation errors: {e.errors()}")
             return jsonify({"error": "Invalid input data format", "details": e.errors()}), 400
@@ -208,6 +206,8 @@ def process_openai_request(messages, system, tools, model, temperature=0.7, max_
     if tools and len(tools) > 0:
         # Format tools for OpenAI - simplistic implementation
         payload["tools"] = [{"type": "function", "function": {"name": tool}} for tool in tools]
+    else:
+        payload["tools"] = []
 
     response = requests.post("https://api.openai.com/v1/chat/completions",
                            headers=headers,
