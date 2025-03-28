@@ -1,4 +1,11 @@
-from flask import Flask, request, jsonify, Response
+import warnings
+
+warnings.filterwarnings("ignore")
+from contextlib import suppress
+from typing import Type
+
+with suppress(BaseException):
+    from flask import Flask, request, jsonify, Response
 import logging
 import os
 from dotenv import load_dotenv
@@ -521,9 +528,32 @@ def generate_embeddings():
 
             return jsonify(response.json())
 
+        elif provider == 'anthropic':
+            if not ANTHROPIC_API_KEY:
+                return jsonify({"error": "Anthropic API key not configured"}), 500
+
+            headers = {
+                "Content-Type": "application/json",
+                "x-api-key": ANTHROPIC_API_KEY,
+                "anthropic-version": "2023-06-01"
+            }
+            payload = {
+                "model": model or "claude-2",
+                "prompt": text
+            }
+
+            response = requests.post("https://api.anthropic.com/v1/complete",
+                                   headers=headers,
+                                   json=payload)
+
+            if response.status_code != 200:
+                return jsonify({"error": f"Anthropic API error: {response.text}"}), response.status_code
+
+            return jsonify(response.json())
+
         elif provider == 'ollama':
             # Use Ollama for embeddings
-            response = ollama.embeddings(model=model or "llama2", prompt=text)
+            response = ollama.embeddings(model="llama3.1:8b" or "nemotron-mini:latest", prompt="write ollama's python library as java")
             return jsonify(response)
 
         else:
