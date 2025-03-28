@@ -21,6 +21,20 @@
 - `SSL_CERT_PATH`: Path to SSL certificate for HTTPS
 - `SSL_KEY_PATH`: Path to SSL private key for HTTPS
 
+## API Endpoints
+- `/api/v1/chat`: Chat completion endpoint
+- `/api/v1/models`: List available models
+- `/api/v1/embeddings`: Generate text embeddings
+- `/api/v1/conversations/{id}`: Manage conversation history
+- `/health`: Health check endpoint
+
+## Features
+- Multiple LLM providers: Ollama, OpenAI, Anthropic, Mistral
+- Streaming responses
+- Model parameter controls (temperature, top_p, max_tokens)
+- Conversation history management
+- Text embeddings generation
+
 ## Code Style Guidelines
 - **Formatting**: Use Black with default settings
 - **Imports**: Group standard library, third-party, then local imports
