@@ -14,6 +14,13 @@
 - `ANTHROPIC_API_KEY`: API key for Anthropic services
 - `MISTRAL_API_KEY`: API key for Mistral services
 
+## Server Configuration
+- `HOST`: Host address to bind to (default: 0.0.0.0)
+- `PORT`: Port to listen on (default: 5000)
+- `DEBUG`: Enable debug mode (default: False)
+- `SSL_CERT_PATH`: Path to SSL certificate for HTTPS
+- `SSL_KEY_PATH`: Path to SSL private key for HTTPS
+
 ## Code Style Guidelines
 - **Formatting**: Use Black with default settings
 - **Imports**: Group standard library, third-party, then local imports
