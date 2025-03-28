@@ -26,7 +26,7 @@ POST /api/v1/chat
 ```json
 {
   "provider": "ollama",       // Optional (default: "ollama")
-  "model": "llama2",          // Optional (default depends on provider)
+  "model": "nemotron-mini-latest",          // Optional (default depends on provider)
   "messages": [               // Required
     {
       "role": "user",
@@ -48,7 +48,7 @@ POST /api/v1/chat
 ```json
 {
   "id": "response-id",
-  "model": "llama2",
+  "model": "nemotron-mini-latest",
   "created_at": "2023-01-01T00:00:00Z",
   "message": {
     "role": "assistant",
@@ -87,7 +87,7 @@ GET /api/v1/models
 ```json
 {
   "models": {
-    "ollama": ["llama2", "mistral", "phi2"],
+    "ollama": ["mistral:orca", "phi2"],
     "openai": ["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo"],
     "anthropic": ["claude-3-opus-20240229", "claude-3-sonnet-20240229", "claude-3-haiku-20240307"],
     "mistral": ["mistral-tiny", "mistral-small", "mistral-medium", "mistral-large-latest"]
