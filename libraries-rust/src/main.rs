@@ -13,12 +13,21 @@ struct Point {
     y: i32,
 }
 
-#[typestate]
-enum State {
-    Initial,
-    Intermediate,
-    Final,
+mod state {
+    use typestate::typestate;
+
+    typestate! {
+        pub enum State {
+            Initial,
+            Intermediate,
+            Final,
+        }
+    }
 }
+
+use state::State::Final;
+use state::State::Initial;
+use state::State::Intermediate;
 
 #[enum_dispatch]
 trait Shape {
@@ -45,7 +54,7 @@ impl Shape for Square {
     }
 }
 
-#[derive(EnumIter, IntoEnumIterator)]
+#[derive(EnumIter, IntoEnumIterator, Debug)]
 enum Color {
     Red,
     Green,
@@ -86,8 +95,8 @@ fn main() {
     }
 
     let mut map = AnyMap::new();
-    map.insert(42);
-    map.insert("value");
+    map.insert("key1", 42);
+    map.insert("key2", "value");
 
     let value1: i32 = *map.get::<i32>().unwrap();
     let value2: &str = map.get::<&str>().unwrap();
