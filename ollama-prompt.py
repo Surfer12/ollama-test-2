@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, Response
 import logging
 import os
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, validator, ValidationError
+from pydantic import BaseModel, Field, ValidationError
 from typing import List, Dict, Optional
 import requests
 import json
@@ -36,7 +36,7 @@ class ChatSchema(BaseModel):
     system: str = Field(..., description="System message")
     tools: Optional[List[str]] = Field(None, description="List of tools")
     model: str = Field("llama2", description="Model to use")
-    provider: str = Field("ollama", description="Provider to use", regex="^(ollama|openai|anthropic|mistral)$")
+    provider: str = Field("ollama", description="Provider to use", pattern="^(ollama|openai|anthropic|mistral)$")
     temperature: float = Field(0.7, description="Temperature for the model", ge=0, le=2)
     max_tokens: int = Field(1000, description="Maximum number of tokens", gt=0)
     top_p: float = Field(0.9, description="Top-p sampling", ge=0, le=1)
