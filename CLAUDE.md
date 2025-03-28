@@ -8,6 +8,12 @@
 - Test: `pytest`
 - Single test: `pytest tests/test_file.py::test_function -v`
 
+## Environment Variables
+- `OLLAMA_API_KEY`: API key for Ollama (if required)
+- `OPENAI_API_KEY`: API key for OpenAI services
+- `ANTHROPIC_API_KEY`: API key for Anthropic services
+- `MISTRAL_API_KEY`: API key for Mistral services
+
 ## Code Style Guidelines
 - **Formatting**: Use Black with default settings
 - **Imports**: Group standard library, third-party, then local imports

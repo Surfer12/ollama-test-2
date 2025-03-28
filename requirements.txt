@@ -1,0 +1,6 @@
+flask>=2.0.0
+ollama
+python-dotenv
+marshmallow
+requests
+logging
