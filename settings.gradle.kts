@@ -6,5 +6,15 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
-rootProject.name = "ollama-large"
-include("app")
+pluginManagement {
+    // Include 'plugins build' to define convention plugins.
+    includeBuild("build-logic")
+}
+
+plugins {
+    // Apply the foojay-resolver plugin to allow automatic download of JDKs
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+}
+
+rootProject.name = "ollama-java"
+include("app", "list", "utilities")

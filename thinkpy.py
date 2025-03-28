@@ -1,5 +1,5 @@
 import unittest
-from think_tool import Thought, Log
+from thinkjava import Thought, Log
 from dataclasses import dataclass
 from functools import total_ordering
 
